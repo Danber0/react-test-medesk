@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+
+import { tabs } from "./utils/tabs";
+import "./index.css";
 
 function App() {
+  const [activeId, setActiveId] = useState<number | null>(null);
+
+  const handleActive = (index: number) => {
+    setActiveId(index);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="app">
+      <div className="app-container">
+        <h1 className="app-title">FAQ</h1>
+        <div className="app-tabs">
+          {tabs.map((obj, index) => (
+            <div className={obj.id === activeId ? "tab active" : "tab"}>
+              <input id="tab-four" type="checkbox" name="tabs" />
+              <label htmlFor="tab-four" onClick={() => handleActive(index + 1)}>
+                {obj.title}
+              </label>
+              <div className="tab-content">
+                <p>{obj.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
-
 export default App;
