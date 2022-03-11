@@ -7,7 +7,11 @@ function App() {
   const [activeId, setActiveId] = useState<number | null>(null);
 
   const handleActive = (index: number) => {
-    setActiveId(index);
+    if (index !== activeId) {
+      setActiveId(index);
+    } else {
+      setActiveId(null);
+    }
   };
 
   return (
